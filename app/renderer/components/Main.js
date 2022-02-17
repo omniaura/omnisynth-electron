@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { compilePatches } from '../../services/oscInterface';
 
 export default class Main extends Component {
   constructor(props) {
@@ -17,7 +18,7 @@ export default class Main extends Component {
       <div>
         <h2>Welcome to OmniSynth!</h2>
         <p>{this.state.counter}</p>
-        <button onClick={this.incrementCounter}>Increment</button>
+        <button onClick={compilePatches}>Compile Patches</button>
       </div>
     );
   }

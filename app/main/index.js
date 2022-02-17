@@ -1,8 +1,6 @@
 import path from 'path';
 import { app, crashReporter, BrowserWindow, Menu } from 'electron';
 
-const OSC = require('osc-js');
-
 const isDevelopment = process.env.NODE_ENV === 'development';
 
 let mainWindow = null;
@@ -36,27 +34,13 @@ app.on('window-all-closed', () => {
   }
 });
 
-const startOscServer = () => {
-  const osc = new OSC({
-    plugin: new OSC.DatagramPlugin({ send: { port: 57120, host: '127.0.0.1' } })
-  });
-
-  osc.on('open', () => {
-    console.log('osc opened')
-  })
-
-  osc.open();
-
-  return osc;
-}
-
+/////////////////
+/// APP START ///
+/////////////////
 app.on('ready', async () => {
   if (isDevelopment) {
     await installExtensions();
   }
-
-  startOscServer();
-
   mainWindow = new BrowserWindow({
     width: 1000,
     height: 800,

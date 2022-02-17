@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Main from '../components/Main';
+import Loading from '../components/Loading';
 
 const mapStateToProps = (state) => {
   return state;
@@ -10,4 +10,5 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Loading);

@@ -1,47 +1,40 @@
 import React, { useEffect, useState } from 'react';
-import { sendOmnisynthMessage } from '../../services/oscInterface';
+import { useLocation } from 'react-router';
+import { compileAllPatches, sendOmnisynthMessage } from '../../services/omniSynth';
 
 const Loading = () => {
-  const [serverInitialized, setServerInitialized] = useState(false);
   const [patchesCompiled, setPatchesCompiled] = useState(false);
   const [patternsCompiled, setPattternsCompiled] = useState(false);
-
-  useEffect(() => {
-    const initializeServer = async () => {
-      await sendOmnisynthMessage('/omni');
-      setServerInitialized(true);
-    }
-
-    initializeServer();
-  }, []);
+  const location = useLocation();
 
   useEffect(() => {
     const compilePatches = async () => {
-      await sendOmnisynthMessage('/patches/compileAll')
+      await compileAllPatches();
       setPatchesCompiled(true);
     }
 
-    const compilePatterns = async () => {
-      await sendOmnisynthMessage('/patterns/compile')
-      setPattternsCompiled(true);
-    }
+    // const compilePatterns = async () => {
+    //   await sendOmnisynthMessage('/patterns/compile')
+    //   setPattternsCompiled(true);
+    // }
 
-    if (serverInitialized) {
-      compilePatches();
-      compilePatterns();
-    }
+    compilePatches();
+    // compilePatterns();
 
     // direct to main screen
-  }, [serverInitialized]);
+  }, []);
+
+  // useEffect(() => {
+  //   // if (patchesCompiled && patternsCompiled) {
+  //   //   location = './home';
+  //   // }
+  // })
 
   return (
     <div>
-      <h2>Loading OmniSynth...</h2>
-      <ul>
-        <li>{!serverInitialized ? 'Initializing OmniSynth Server...' : 'OmniSynth Server initialized!'}</li>
-        <li>{!patchesCompiled ? 'Compiling patches...' : 'Patches compiled!'}</li>
-        <li>{!patternsCompiled ? 'Compiling patterns...' : 'Patterns compiled!'}</li>
-      </ul>
+      <h1>Loading OmniSynth...</h1>
+      <p>{!patchesCompiled ? 'Compiling patches...' : 'Patches compiled!'}</p>
+      <p>{!patternsCompiled ? 'Compiling patterns...' : 'Patterns compiled!'}</p>
     </div>
   );
 }

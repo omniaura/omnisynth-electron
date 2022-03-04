@@ -7,5 +7,6 @@ import LoadingPage from './containers/LoadingPage';
 export default (
   <Switch>
     <Route exact path="/" component={LoadingPage} />
+    <Route exact path="/home" component={MainPage} />
   </Switch>
 );

@@ -5,6 +5,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import { createMemoryHistory } from 'history';
 import routes from './routes';
 import configureStore from './store';
+import styled from 'styled-components';
 
 const syncHistoryWithStore = (store, history) => {
   const { router } = store.getState();
@@ -20,9 +21,19 @@ syncHistoryWithStore(store, routerHistory);
 
 const rootElement = document.querySelector(document.currentScript.getAttribute('data-container'));
 
+const StyledRouterContainer = styled.div`
+  height: 100vh;
+  width: 100vw;
+  background: black;
+  color: white;
+`
+
 ReactDOM.render(
   <Provider store={store}>
-    <ConnectedRouter history={routerHistory}>{routes}</ConnectedRouter>
+    <StyledRouterContainer>
+      <ConnectedRouter history={routerHistory}>{routes}</ConnectedRouter>
+    </StyledRouterContainer>
   </Provider>,
   rootElement,
 );
+

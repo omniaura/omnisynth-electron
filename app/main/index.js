@@ -52,6 +52,8 @@ app.on('ready', async () => {
     },
   });
 
+  mainWindow.removeMenu();
+
   mainWindow.loadFile(path.resolve(path.join(__dirname, '../renderer/index.html')));
 
   // show window once on first load

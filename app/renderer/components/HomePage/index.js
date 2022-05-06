@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import PatchList from './components/PatchList';
+import { useHistory } from "react-router"
+
 
 const HomePage = () => {
   const [patchList, setPatchList] = useState(['tone1', 'tone2', 'tone3', 'tone4', 'tone5', 'tone6']);
+  const history = useHistory();
 
   // useEffect(() => {
   //   const getPatches = async () => {
@@ -14,12 +17,16 @@ const HomePage = () => {
   //   getPatches();
   // }, [])
 
+  const handleEditPatchesClick = () => {
+    history.push('/patches')
+  }
+
   return (
     <StyledContainer>
       <h1>Welcome to OmniSynth!</h1>
       <div className='interactionPane'>
         <div className='grid-item actionButtons'>
-          <button className='editPatchesBtn'>
+          <button className='editPatchesBtn' onClick={handleEditPatchesClick}>
             Edit Patches
           </button>
           <button className='editPatternsBtn'>
